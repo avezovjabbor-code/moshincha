@@ -1,0 +1,3251 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVTO GRAND PRO — Desktop Moshincha Portali & Tyuning Studio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #080a0f;
+            --bg-card: #10141f;
+            --bg-card-hover: #161c2c;
+            --bg-glass: rgba(16, 20, 31, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(0, 234, 255, 0.35);
+            --cyan: #00f0ff;
+            --cyan-glow: rgba(0, 240, 255, 0.35);
+            --red: #ff2a5f;
+            --red-glow: rgba(255, 42, 95, 0.4);
+            --gold: #ffb703;
+            --gold-glow: rgba(255, 183, 3, 0.35);
+            --emerald: #10b981;
+            --purple: #9d4edd;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+            --font-head: 'Outfit', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition: all 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-light);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 15% 10%, rgba(0, 240, 255, 0.07) 0%, transparent 40%),
+                radial-gradient(circle at 85% 60%, rgba(255, 42, 95, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 50% 90%, rgba(157, 78, 221, 0.07) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Ambient Speed Lines & Grid Background */
+        .ambient-grid {
+            position: fixed;
+            inset: 0;
+            background-size: 50px 50px;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #06080d;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #222b3d;
+            border-radius: 5px;
+            border: 2px solid #06080d;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--cyan);
+        }
+
+        /* HEADER / NAVBAR */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(8, 10, 15, 0.85);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 12px 28px;
+        }
+
+        .header-inner {
+            max-width: 1560px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--cyan), #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 25px var(--cyan-glow);
+            font-size: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.4) 50%, transparent 60%);
+            animation: lightSweep 4s infinite linear;
+        }
+
+        @keyframes lightSweep {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .logo-text h1 {
+            font-family: var(--font-head);
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 40%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .logo-text p {
+            font-size: 11px;
+            color: var(--cyan);
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Nav Links */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px 6px;
+            border-radius: 999px;
+            border: 1px solid var(--border-glass);
+        }
+
+        .nav-link {
+            padding: 8px 18px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            background: transparent;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .nav-link.active {
+            color: var(--cyan);
+            background: rgba(0, 240, 255, 0.12);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+        }
+
+        /* Header Quick Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-action {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid var(--border-glass);
+            background: var(--bg-card);
+            color: var(--text-light);
+        }
+
+        .btn-action:hover {
+            border-color: var(--cyan);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .btn-sound {
+            width: 42px;
+            height: 42px;
+            padding: 0;
+            justify-content: center;
+            font-size: 18px;
+            border-radius: 50%;
+        }
+
+        .btn-sound.muted {
+            opacity: 0.5;
+            color: var(--text-dim);
+            border-color: var(--border-glass);
+        }
+
+        .btn-sound.active {
+            color: var(--cyan);
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px var(--cyan-glow);
+        }
+
+        /* MAIN CONTAINER */
+        main {
+            position: relative;
+            z-index: 10;
+            max-width: 1560px;
+            margin: 0 auto;
+            padding: 24px 28px 80px;
+        }
+
+        /* HERO SHOWCASE SECTION */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 28px;
+            align-items: center;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, rgba(16, 20, 31, 0.9) 0%, rgba(10, 13, 22, 0.8) 100%);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-badge-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .pill-badge.flame {
+            background: rgba(255, 42, 95, 0.15);
+            color: var(--red);
+            border: 1px solid rgba(255, 42, 95, 0.3);
+        }
+
+        .pill-badge.cyan {
+            background: rgba(0, 240, 255, 0.12);
+            color: var(--cyan);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        .pill-badge.gold {
+            background: rgba(255, 183, 3, 0.15);
+            color: var(--gold);
+            border: 1px solid rgba(255, 183, 3, 0.3);
+        }
+
+        .hero-title {
+            font-family: var(--font-head);
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.08;
+            margin-bottom: 16px;
+            letter-spacing: -1.5px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--cyan) 0%, #3b82f6 50%, var(--purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+            max-width: 580px;
+        }
+
+        /* Dynamic Live Gauges */
+        .hero-stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            transition: var(--transition);
+        }
+
+        .stat-box:hover {
+            border-color: var(--cyan);
+            background: rgba(0, 240, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .stat-val {
+            font-family: var(--font-mono);
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .stat-val small {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--cyan);
+            margin-left: 2px;
+        }
+
+        .hero-cta-btns {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-rev-gas {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--red) 0%, #e11d48 100%);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-family: var(--font-head);
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 0 30px var(--red-glow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-rev-gas:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 45px rgba(255, 42, 95, 0.7);
+        }
+
+        .btn-rev-gas:active {
+            transform: scale(0.97);
+        }
+
+        .btn-horn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-horn:hover {
+            border-color: var(--gold);
+            background: rgba(255, 183, 3, 0.1);
+            color: var(--gold);
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        /* Hero Right: Interactive 3D Canvas / Car Display */
+        .hero-car-stage {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .car-viewport {
+            width: 100%;
+            height: 380px;
+            background: radial-gradient(circle at 50% 60%, rgba(20, 26, 42, 0.8) 0%, rgba(8, 10, 15, 0.95) 75%);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Dynamic Neon Underglow */
+        .neon-underglow {
+            position: absolute;
+            bottom: 40px;
+            width: 80%;
+            height: 35px;
+            background: var(--cyan);
+            border-radius: 50%;
+            filter: blur(35px);
+            opacity: 0.85;
+            transition: all 0.4s ease;
+            pointer-events: none;
+        }
+
+        /* Car SVG Interactive Illustration */
+        .car-svg-frame {
+            position: relative;
+            z-index: 5;
+            width: 90%;
+            max-width: 520px;
+            filter: drop-shadow(0 20px 25px rgba(0, 0, 0, 0.9));
+            transition: transform 0.3s ease;
+        }
+
+        .car-svg-frame:hover {
+            transform: scale(1.03) rotate(-0.5deg);
+        }
+
+        /* Tachometer overlay in Hero */
+        .tachometer-hud {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 20;
+        }
+
+        .rpm-meter {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .rpm-bar-track {
+            width: 140px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .rpm-bar-fill {
+            width: 15%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--emerald) 0%, var(--gold) 60%, var(--red) 90%);
+            border-radius: 4px;
+            transition: width 0.08s ease-out;
+        }
+
+        .speedo-num {
+            font-family: var(--font-mono);
+            font-size: 26px;
+            font-weight: 800;
+            color: #fff;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .speedo-num small {
+            font-size: 11px;
+            color: var(--cyan);
+            margin-left: 2px;
+        }
+
+        /* Interactive Tyuning Color Switchers on Hero */
+        .car-controls-strip {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 14px;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+        }
+
+        .palette-dots {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .color-dot {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .color-dot:hover {
+            transform: scale(1.2);
+        }
+
+        .color-dot.active {
+            border-color: #fff;
+            box-shadow: 0 0 14px currentColor;
+            transform: scale(1.15);
+        }
+
+        .underglow-selector {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .underglow-btn {
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            color: #fff;
+            font-size: 11px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .underglow-btn.active {
+            background: var(--cyan);
+            color: #000;
+            font-weight: 700;
+            border-color: var(--cyan);
+            box-shadow: 0 0 10px var(--cyan-glow);
+        }
+
+        /* SECTION HEADERS */
+        .section-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 14px;
+        }
+
+        .section-title-wrap h2 {
+            font-family: var(--font-head);
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title-wrap p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        /* FILTER TABS */
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .filter-btn {
+            padding: 9px 20px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--cyan);
+            color: #000;
+            border-color: var(--cyan);
+            box-shadow: 0 0 20px var(--cyan-glow);
+        }
+
+        .search-input-wrap {
+            margin-left: auto;
+            position: relative;
+            min-width: 260px;
+        }
+
+        .search-input-wrap input {
+            width: 100%;
+            padding: 9px 16px 9px 38px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glass);
+            color: #fff;
+            font-size: 13px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-input-wrap input:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px var(--cyan-glow);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .search-input-wrap svg {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+            pointer-events: none;
+        }
+
+        /* CAR GRID */
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 26px;
+            margin-bottom: 60px;
+        }
+
+        .car-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .car-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--cyan);
+            box-shadow: 0 20px 40px -15px rgba(0, 240, 255, 0.2);
+        }
+
+        .card-img-wrap {
+            position: relative;
+            height: 220px;
+            background: #0d111a;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .car-card:hover .card-img-wrap img {
+            transform: scale(1.08);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 5;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-badge.trend {
+            background: rgba(255, 42, 95, 0.85);
+            border-color: var(--red);
+        }
+
+        .card-badge.uzb {
+            background: rgba(16, 185, 129, 0.85);
+            border-color: var(--emerald);
+        }
+
+        .card-badge.vip {
+            background: rgba(255, 183, 3, 0.85);
+            border-color: var(--gold);
+            color: #000;
+        }
+
+        .card-sound-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            z-index: 5;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .card-sound-btn:hover {
+            background: var(--red);
+            border-color: var(--red);
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-brand {
+            font-size: 12px;
+            color: var(--cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .card-title {
+            font-family: var(--font-head);
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
+
+        .card-specs-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 12px 0;
+            border-top: 1px solid var(--border-glass);
+            border-bottom: 1px solid var(--border-glass);
+            margin-bottom: 18px;
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .spec-item span:first-child {
+            font-size: 10px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .spec-item span:last-child {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .price-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-usd {
+            font-family: var(--font-mono);
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--gold);
+        }
+
+        .price-uzs {
+            font-size: 11px;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        .card-btn-inspect {
+            padding: 10px 18px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.15) 0%, rgba(59, 130, 246, 0.2) 100%);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: var(--cyan);
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .card-btn-inspect:hover {
+            background: var(--cyan);
+            color: #000;
+            box-shadow: 0 0 20px var(--cyan-glow);
+        }
+
+        /* 3D CUSTOMIZER / TYUNING STUDIO SECTION */
+        .studio-section {
+            background: linear-gradient(145deg, #0e121c 0%, #131926 100%);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 36px;
+            margin-bottom: 60px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .studio-layout {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 36px;
+        }
+
+        .studio-display {
+            background: #090c13;
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            min-height: 440px;
+            overflow: hidden;
+        }
+
+        .studio-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .control-group {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            padding: 18px;
+        }
+
+        .control-label {
+            font-size: 13px;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .control-label span {
+            color: var(--cyan);
+            font-size: 12px;
+            text-transform: none;
+            font-weight: 600;
+        }
+
+        .car-select-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .car-choice-btn {
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            color: var(--text-light);
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .car-choice-btn:hover,
+        .car-choice-btn.active {
+            border-color: var(--cyan);
+            background: rgba(0, 240, 255, 0.15);
+            color: #fff;
+        }
+
+        .palette-grid {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tyune-swatch {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid rgba(255, 255, 255, 0.15);
+            transition: var(--transition);
+        }
+
+        .tyune-swatch:hover {
+            transform: scale(1.18);
+        }
+
+        .tyune-swatch.active {
+            border-color: #fff;
+            box-shadow: 0 0 16px currentColor;
+            transform: scale(1.2);
+        }
+
+        .switch-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pill-toggle {
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .pill-toggle:hover,
+        .pill-toggle.active {
+            background: var(--purple);
+            color: #fff;
+            border-color: var(--purple);
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
+        }
+
+        .studio-summary {
+            background: rgba(0, 240, 255, 0.06);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .studio-price {
+            font-family: var(--font-mono);
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--gold);
+        }
+
+        /* 0-100 DRAG DYNO SIMULATOR SECTION */
+        .dyno-section {
+            background: linear-gradient(135deg, #10141f 0%, #0a0d14 100%);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 36px;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dyno-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .pedal-station {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-glass);
+            text-align: center;
+        }
+
+        .pedal-btn {
+            width: 140px;
+            height: 220px;
+            background: linear-gradient(180deg, #334155 0%, #1e293b 50%, #0f172a 100%);
+            border: 4px solid #475569;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7), inset 0 2px 5px rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 12px;
+            color: #fff;
+            font-weight: 900;
+            font-family: var(--font-head);
+            font-size: 18px;
+            transition: all 0.1s ease;
+            position: relative;
+        }
+
+        .pedal-btn::before {
+            content: '';
+            width: 70%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 0 rgba(255, 255, 255, 0.15), 0 24px 0 rgba(255, 255, 255, 0.15), 0 36px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        .pedal-btn:hover {
+            border-color: var(--red);
+            box-shadow: 0 0 30px var(--red-glow);
+        }
+
+        .pedal-btn.pressed {
+            transform: scale(0.94) translateY(12px);
+            border-color: var(--red);
+            background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%);
+            box-shadow: 0 5px 15px var(--red-glow);
+        }
+
+        .dyno-gauges-cluster {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .analog-dial-box {
+            background: #080a0f;
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .big-meter {
+            text-align: center;
+        }
+
+        .big-meter-val {
+            font-family: var(--font-mono);
+            font-size: 54px;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .big-meter-val.redline {
+            color: var(--red);
+            text-shadow: 0 0 25px var(--red-glow);
+            animation: pulseText 0.3s infinite alternate;
+        }
+
+        @keyframes pulseText {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.04);
+            }
+        }
+
+        .big-meter-lbl {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 6px;
+        }
+
+        .drag-times-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            padding: 20px;
+        }
+
+        .drag-time-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+        }
+
+        .drag-time-row:last-child {
+            border-bottom: none;
+        }
+
+        .drag-val-record {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--cyan);
+        }
+
+        /* ARCADE MINI RACER GAME SECTION */
+        .game-section {
+            background: linear-gradient(135deg, #0b0e17 0%, #121724 100%);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 36px;
+            margin-bottom: 60px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .game-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .game-canvas-box {
+            position: relative;
+            background: #05070a;
+            border: 2px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 480px;
+        }
+
+        #raceCanvas {
+            display: block;
+            background: #11141c;
+            border-radius: var(--radius-md);
+        }
+
+        .game-overlay-screen {
+            position: absolute;
+            inset: 0;
+            background: rgba(5, 7, 10, 0.88);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            z-index: 50;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .game-overlay-screen.hidden {
+            display: none;
+        }
+
+        .game-overlay-screen h3 {
+            font-family: var(--font-head);
+            font-size: 34px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .game-overlay-screen p {
+            color: var(--text-muted);
+            font-size: 14px;
+            max-width: 400px;
+        }
+
+        .btn-play-game {
+            padding: 14px 34px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--cyan) 0%, #3b82f6 100%);
+            color: #000;
+            font-weight: 900;
+            font-family: var(--font-head);
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 25px var(--cyan-glow);
+            transition: var(--transition);
+        }
+
+        .btn-play-game:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px var(--cyan-glow);
+        }
+
+        .game-stats-sidebar {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .game-stat-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            padding: 16px;
+        }
+
+        .game-stat-card .lbl {
+            font-size: 11px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .game-stat-card .val {
+            font-family: var(--font-mono);
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--cyan);
+            margin-top: 4px;
+        }
+
+        .controls-cheat-sheet {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            border: 1px solid var(--border-glass);
+        }
+
+        .controls-cheat-sheet h4 {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .cheat-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .kbd-key {
+            padding: 3px 8px;
+            background: #1e2638;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: #fff;
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        /* CREDIT / LOAN CALCULATOR */
+        .loan-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 36px;
+            margin-bottom: 60px;
+        }
+
+        .loan-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .calc-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .slider-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .slider-header span:last-child {
+            color: var(--cyan);
+            font-family: var(--font-mono);
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #1e2638;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            background: var(--cyan);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 12px var(--cyan-glow);
+            transition: var(--transition);
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .calc-result-card {
+            background: linear-gradient(145deg, #161c2c 0%, #0d121c 100%);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .calc-monthly-box {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .calc-monthly-box .lbl {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            font-weight: 700;
+        }
+
+        .calc-monthly-box .val-usd {
+            font-family: var(--font-mono);
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--cyan);
+        }
+
+        .calc-monthly-box .val-uzs {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* MODAL STYLES */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 6, 10, 0.85);
+            backdrop-filter: blur(16px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            max-width: 720px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+            transform: translateY(20px) scale(0.98);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-backdrop.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close-btn:hover {
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        /* TOAST NOTIFICATION */
+        .toast-bubble {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: rgba(16, 20, 31, 0.95);
+            border: 1px solid var(--cyan);
+            border-radius: var(--radius-md);
+            padding: 14px 22px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            box-shadow: 0 10px 30px var(--cyan-glow);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .toast-bubble.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border-glass);
+            padding: 30px 28px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+            }
+
+            .studio-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .dyno-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .loan-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-stats-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .cars-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Ambient Grid Effect -->
+    <div class="ambient-grid"></div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header>
+        <div class="header-inner">
+            <a href="#hero" class="logo-wrap">
+                <div class="logo-icon">🏎️</div>
+                <div class="logo-text">
+                    <h1>AVTO SPEED PRO</h1>
+                    <p>Desktop Showroom & Studio</p>
+                </div>
+            </a>
+
+            <nav class="nav-menu">
+                <a href="#hero" class="nav-link active"><span>⚡</span> Asosiy</a>
+                <a href="#catalog" class="nav-link"><span>🚘</span> Showroom</a>
+                <a href="#studio" class="nav-link"><span>🎨</span> 3D Tyuning</a>
+                <a href="#dyno" class="nav-link"><span>⏱️</span> 0-100 Dyno</a>
+                <a href="#game" class="nav-link"><span>🎮</span> Mini Poyga</a>
+                <a href="#loan" class="nav-link"><span>💳</span> Kalkulyator</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="btn-action btn-sound active" id="btnToggleSound"
+                    title="Ovozni yoqish / o'chirish">🔊</button>
+                <button class="btn-action" id="btnFullscreen"><span>⛶</span> To'liq ekran</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN BODY -->
+    <main>
+
+        <!-- HERO SHOWCASE WITH INTERACTIVE CAR -->
+        <section class="hero-section" id="hero">
+            <div class="hero-content">
+                <div class="hero-badge-row">
+                    <span class="pill-badge flame">🔥 YILNING ENG ZO'R MASHINALARI</span>
+                    <span class="pill-badge cyan">⚡ SPORT & PREMIUM</span>
+                    <span class="pill-badge gold">⭐ DESKTOP MAXSUS NASHRI</span>
+                </div>
+
+                <h1 class="hero-title">Tezlik va Elegansiyani <span>O'zingiz Boshqaring!</span></h1>
+
+                <p class="hero-desc">
+                    O'zbekistonning eng ommabop va jahon superkarlari: Chevrolet Malibu 2 Premier Turbo, Gentra Black,
+                    BMW M5 CS, Lamborghini Revuelto va Porsche 911. Tyuning qiling, gazni bosing va poygalarda g'olib
+                    bo'ling!
+                </p>
+
+                <div class="hero-stats-row">
+                    <div class="stat-box">
+                        <div class="stat-label">0-100 km/soat</div>
+                        <div class="stat-val">2.5 <small>soniya</small></div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Maks. Tezlik</div>
+                        <div class="stat-val">350 <small>km/h</small></div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Quvvat</div>
+                        <div class="stat-val">1015 <small>ot kuchi</small></div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Dvigatel</div>
+                        <div class="stat-val">V12 <small>Hybrid</small></div>
+                    </div>
+                </div>
+
+                <div class="hero-cta-btns">
+                    <button class="btn-rev-gas" id="btnHeroRev">
+                        <span>🏎️</span> GAZNI BOS! (REV ENGINE)
+                    </button>
+                    <button class="btn-horn" id="btnHeroHorn">
+                        <span>📢</span> Signal Chalish (Horn)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Interactive Car Stage Viewport -->
+            <div class="hero-car-stage">
+                <div class="car-viewport" id="heroCarViewport">
+                    <!-- Tachometer Overlay HUD -->
+                    <div class="tachometer-hud">
+                        <div class="rpm-meter">
+                            <div style="font-size: 10px; color: var(--text-dim); font-weight: 700;">RPM TACHO</div>
+                            <div class="rpm-bar-track">
+                                <div class="rpm-bar-fill" id="heroRpmFill"></div>
+                            </div>
+                        </div>
+                        <div class="speedo-num" id="heroSpeedoVal">0 <small>KM/H</small></div>
+                    </div>
+
+                    <!-- Dynamic Neon Underglow -->
+                    <div class="neon-underglow" id="heroNeonUnderglow"></div>
+
+                    <!-- Vector High Performance Sport Car Graphic -->
+                    <div class="car-svg-frame" id="heroCarSvgWrap">
+                        <svg viewBox="0 0 800 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Shadow -->
+                            <ellipse cx="400" cy="300" rx="360" ry="24" fill="rgba(0,0,0,0.8)" filter="blur(8px)" />
+
+                            <!-- Car Body Main Path -->
+                            <g id="carBodyLayer">
+                                <path id="carBodyPath"
+                                    d="M120 220 L160 170 L260 140 L450 135 L620 180 L720 215 L740 250 L680 260 L620 260 C610 225 560 225 550 260 L270 260 C260 225 210 225 200 260 L120 260 Z"
+                                    fill="#00f0ff" stroke="#ffffff" stroke-width="2" />
+
+                                <!-- Cabin & Roof -->
+                                <path d="M275 140 L350 75 L520 75 L590 140 Z" fill="#111827" stroke="#4b5563"
+                                    stroke-width="3" />
+
+                                <!-- Windows -->
+                                <path id="carWindowPath" d="M360 85 L440 85 L440 132 L290 132 Z" fill="#38bdf8"
+                                    fill-opacity="0.5" />
+                                <path d="M455 85 L515 85 L570 132 L455 132 Z" fill="#38bdf8" fill-opacity="0.4" />
+
+                                <!-- Body Lines / Aerodynamics -->
+                                <path d="M180 180 L290 170 L480 170 L650 200" stroke="rgba(255,255,255,0.4)"
+                                    stroke-width="3" stroke-linecap="round" />
+                                <path d="M220 210 L580 210" stroke="rgba(0,0,0,0.3)" stroke-width="4" />
+
+                                <!-- Headlights -->
+                                <polygon id="headlightMesh" points="700,210 735,215 725,230 690,225" fill="#ffffff" />
+                                <polygon points="700,210 735,215 725,230 690,225" fill="#00f0ff" opacity="0.6"
+                                    filter="blur(2px)" />
+
+                                <!-- Tail Light -->
+                                <polygon points="120,220 145,218 140,230 118,230" fill="#ff2a5f" filter="blur(1px)" />
+
+                                <!-- Rear Wing / Spoiler -->
+                                <path d="M100 175 L160 175 L150 185 L110 185 Z" fill="#1f2937" stroke="#374151"
+                                    stroke-width="2" />
+                                <rect x="125" y="185" width="8" height="35" fill="#111827" />
+                            </g>
+
+                            <!-- Wheels -->
+                            <!-- Front Wheel -->
+                            <g id="frontWheelGroup" transform="translate(585, 260)">
+                                <circle cx="0" cy="0" r="42" fill="#0a0d14" stroke="#475569" stroke-width="6" />
+                                <circle cx="0" cy="0" r="32" fill="#1e293b" />
+                                <circle cx="0" cy="0" r="28" fill="none" stroke="#e2e8f0" stroke-width="3"
+                                    stroke-dasharray="10 5" id="frontRimSpokes" />
+                                <circle cx="0" cy="0" r="10" fill="#00f0ff" />
+                                <path d="M-15 -15 L-5 -22 L-10 -28 Z" fill="#ff2a5f" /> <!-- Brake Caliper -->
+                            </g>
+
+                            <!-- Rear Wheel -->
+                            <g id="rearWheelGroup" transform="translate(235, 260)">
+                                <circle cx="0" cy="0" r="42" fill="#0a0d14" stroke="#475569" stroke-width="6" />
+                                <circle cx="0" cy="0" r="32" fill="#1e293b" />
+                                <circle cx="0" cy="0" r="28" fill="none" stroke="#e2e8f0" stroke-width="3"
+                                    stroke-dasharray="10 5" id="rearRimSpokes" />
+                                <circle cx="0" cy="0" r="10" fill="#00f0ff" />
+                                <path d="M-15 -15 L-5 -22 L-10 -28 Z" fill="#ff2a5f" /> <!-- Brake Caliper -->
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Live Quick Tuner Palette Controls -->
+                <div class="car-controls-strip">
+                    <div class="palette-dots">
+                        <span
+                            style="font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase;">Rang:</span>
+                        <div class="color-dot active" style="background: #00f0ff; color: #00f0ff;" data-color="#00f0ff"
+                            title="Cyber Cyan"></div>
+                        <div class="color-dot" style="background: #ff2a5f; color: #ff2a5f;" data-color="#ff2a5f"
+                            title="Crimson Red"></div>
+                        <div class="color-dot" style="background: #ffb703; color: #ffb703;" data-color="#ffb703"
+                            title="Sunset Gold"></div>
+                        <div class="color-dot" style="background: #10b981; color: #10b981;" data-color="#10b981"
+                            title="Acid Emerald"></div>
+                        <div class="color-dot" style="background: #a855f7; color: #a855f7;" data-color="#a855f7"
+                            title="Neon Purple"></div>
+                        <div class="color-dot" style="background: #0f172a; color: #38bdf8;" data-color="#0f172a"
+                            title="Midnight Black"></div>
+                        <div class="color-dot" style="background: #f8fafc; color: #ffffff;" data-color="#f8fafc"
+                            title="Pearl White"></div>
+                    </div>
+
+                    <div class="underglow-selector">
+                        <span>Neon:</span>
+                        <button class="underglow-btn active" data-neon="#00f0ff">Cyan</button>
+                        <button class="underglow-btn" data-neon="#ff2a5f">Qizil</button>
+                        <button class="underglow-btn" data-neon="#a855f7">Binafsha</button>
+                        <button class="underglow-btn" data-neon="transparent">O'chirish</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAR SHOWROOM / CATALOG -->
+        <section id="catalog" style="margin-bottom: 60px;">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <h2><span>🚘</span> AVTO SHOWROOM KATALOGI</h2>
+                    <p>O'zbekistondagi eng mashhur modellar va dunyo superkarlarining to'liq ro'yxati</p>
+                </div>
+            </div>
+
+            <!-- Filter Categories and Search -->
+            <div class="filter-bar">
+                <button class="filter-btn active" data-cat="all">Barchasi (8)</button>
+                <button class="filter-btn" data-cat="uzb">🇺🇿 O'zbekiston Saralari</button>
+                <button class="filter-btn" data-cat="supercar">🏎️ Superkarlar</button>
+                <button class="filter-btn" data-cat="suv">🚙 SUV & Krossover</button>
+                <button class="filter-btn" data-cat="electric">⚡ Elektromobillar</button>
+
+                <div class="search-input-wrap">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                    <input type="text" id="carSearchInput" placeholder="Mashina nomi bo'yicha qidiring...">
+                </div>
+            </div>
+
+            <!-- Grid of Cars -->
+            <div class="cars-grid" id="carsContainer">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </section>
+
+        <!-- 3D TYUNING & CUSTOMIZER STUDIO -->
+        <section class="studio-section" id="studio">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <h2><span>🎨</span> 3D TYUNING & VIRTUAL ATELYE</h2>
+                    <p>Mashinangizning rangi, diskalari, oynalar tonirovkasi va neon chiroqlarini o'zingiz tanlang!</p>
+                </div>
+            </div>
+
+            <div class="studio-layout">
+                <!-- Visualizer Display Box -->
+                <div class="studio-display">
+                    <div class="neon-underglow" id="studioNeonUnderglow"></div>
+                    <div class="car-svg-frame" id="studioCarSvg">
+                        <!-- Cloned or interactive Car SVG -->
+                        <svg viewBox="0 0 800 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="400" cy="300" rx="360" ry="24" fill="rgba(0,0,0,0.8)" filter="blur(8px)" />
+
+                            <!-- Body -->
+                            <path id="studioBodyPath"
+                                d="M120 220 L160 170 L260 140 L450 135 L620 180 L720 215 L740 250 L680 260 L620 260 C610 225 560 225 550 260 L270 260 C260 225 210 225 200 260 L120 260 Z"
+                                fill="#ff2a5f" stroke="#ffffff" stroke-width="2" />
+
+                            <path d="M275 140 L350 75 L520 75 L590 140 Z" fill="#111827" stroke="#4b5563"
+                                stroke-width="3" />
+                            <path id="studioWindowPath" d="M360 85 L440 85 L440 132 L290 132 Z" fill="#000000"
+                                fill-opacity="0.8" />
+                            <path id="studioWindowPath2" d="M455 85 L515 85 L570 132 L455 132 Z" fill="#000000"
+                                fill-opacity="0.75" />
+
+                            <path d="M180 180 L290 170 L480 170 L650 200" stroke="rgba(255,255,255,0.4)"
+                                stroke-width="3" stroke-linecap="round" />
+                            <polygon id="studioHeadlights" points="700,210 735,215 725,230 690,225" fill="#00f0ff"
+                                filter="drop-shadow(0 0 8px #00f0ff)" />
+
+                            <!-- Wheels -->
+                            <g transform="translate(585, 260)" id="studioFrontWheel">
+                                <circle cx="0" cy="0" r="42" fill="#0a0d14" stroke="#475569" stroke-width="6" />
+                                <circle cx="0" cy="0" r="32" fill="#1e293b" />
+                                <circle cx="0" cy="0" r="28" fill="none" stroke="#ffb703" stroke-width="4"
+                                    stroke-dasharray="8 6" />
+                                <circle cx="0" cy="0" r="10" fill="#ffffff" />
+                            </g>
+
+                            <g transform="translate(235, 260)" id="studioRearWheel">
+                                <circle cx="0" cy="0" r="42" fill="#0a0d14" stroke="#475569" stroke-width="6" />
+                                <circle cx="0" cy="0" r="32" fill="#1e293b" />
+                                <circle cx="0" cy="0" r="28" fill="none" stroke="#ffb703" stroke-width="4"
+                                    stroke-dasharray="8 6" />
+                                <circle cx="0" cy="0" r="10" fill="#ffffff" />
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div
+                        style="position: absolute; bottom: 20px; left: 24px; font-size: 13px; color: var(--text-muted); font-weight: 600;">
+                        Tyun qilingan model: <span id="studioModelLabel"
+                            style="color: var(--cyan); font-weight: 800;">Malibu 2 Premier Turbo</span>
+                    </div>
+                </div>
+
+                <!-- Customizer Options & Inputs -->
+                <div class="studio-controls">
+                    <!-- Model Selection -->
+                    <div class="control-group">
+                        <div class="control-label">Mashina Modeli <span id="curModelTag">Malibu 2</span></div>
+                        <div class="car-select-row">
+                            <button class="car-choice-btn active" data-model="malibu">Malibu 2 Turbo</button>
+                            <button class="car-choice-btn" data-model="gentra">Gentra Black</button>
+                            <button class="car-choice-btn" data-model="bmw">BMW M5 CS</button>
+                            <button class="car-choice-btn" data-model="lambo">Revuelto V12</button>
+                            <button class="car-choice-btn" data-model="porsche">911 GT3 RS</button>
+                            <button class="car-choice-btn" data-model="tahoe">Tahoe Premier</button>
+                        </div>
+                    </div>
+
+                    <!-- Body Color Palette -->
+                    <div class="control-group">
+                        <div class="control-label">Kuzov Rangi <span id="curColorTag">Crimson Red</span></div>
+                        <div class="palette-grid">
+                            <div class="tyune-swatch" style="background: #00f0ff; color: #00f0ff;" data-color="#00f0ff"
+                                data-name="Cyber Cyan"></div>
+                            <div class="tyune-swatch active" style="background: #ff2a5f; color: #ff2a5f;"
+                                data-color="#ff2a5f" data-name="Crimson Red"></div>
+                            <div class="tyune-swatch" style="background: #ffb703; color: #ffb703;" data-color="#ffb703"
+                                data-name="Sunset Gold"></div>
+                            <div class="tyune-swatch" style="background: #10b981; color: #10b981;" data-color="#10b981"
+                                data-name="Acid Green"></div>
+                            <div class="tyune-swatch" style="background: #8b5cf6; color: #8b5cf6;" data-color="#8b5cf6"
+                                data-name="Royal Purple"></div>
+                            <div class="tyune-swatch" style="background: #0f172a; color: #38bdf8;" data-color="#0f172a"
+                                data-name="Black Edition"></div>
+                            <div class="tyune-swatch" style="background: #f8fafc; color: #ffffff;" data-color="#f8fafc"
+                                data-name="Glacier White"></div>
+                            <div class="tyune-swatch" style="background: #64748b; color: #cbd5e1;" data-color="#64748b"
+                                data-name="Nardo Grey"></div>
+                        </div>
+                    </div>
+
+                    <!-- Tint Level & Disks -->
+                    <div class="control-group">
+                        <div class="control-label">Oyna Qoraytirish (Tonirovka)</div>
+                        <div class="switch-pills">
+                            <button class="pill-toggle" data-tint="0.2">Oddiy (20%)</button>
+                            <button class="pill-toggle" data-tint="0.5">Yarim (50%)</button>
+                            <button class="pill-toggle active" data-tint="0.95">100% Qora (Krugovoy)</button>
+                        </div>
+                    </div>
+
+                    <!-- Underglow LED -->
+                    <div class="control-group">
+                        <div class="control-label">Tag qismi LED Chirog'i (Neon)</div>
+                        <div class="switch-pills">
+                            <button class="pill-toggle active" data-glow="#ff2a5f">Neon Qizil</button>
+                            <button class="pill-toggle" data-glow="#00f0ff">Neon Moviy</button>
+                            <button class="pill-toggle" data-glow="#10b981">Neon Yashil</button>
+                            <button class="pill-toggle" data-glow="#ffb703">Neon Sariq</button>
+                            <button class="pill-toggle" data-glow="transparent">O'chirilgan</button>
+                        </div>
+                    </div>
+
+                    <!-- Summary & Buy simulation -->
+                    <div class="studio-summary">
+                        <div>
+                            <div
+                                style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; font-weight: 700;">
+                                Taxminiy Tyuning Narxi:</div>
+                            <div class="studio-price" id="studioPriceVal">$32,500</div>
+                        </div>
+                        <button class="btn-action" id="btnOrderTuning"
+                            style="background: var(--cyan); color: #000; font-weight: 800; border: none;">
+                            Buyurtma berish 🚀
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 0-100 KM/H DRAG DYNO SIMULATOR -->
+        <section class="dyno-section" id="dyno">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <h2><span>⏱️</span> 0-100 KM/SOAT TEZLANISH DYNO TESTI</h2>
+                    <p>Gaz pedalini bosib turing va avtomobil tezlanishini, dvigatel ovozini real vaqtda sinab ko'ring!
+                    </p>
+                </div>
+            </div>
+
+            <div class="dyno-grid">
+                <!-- Gas Pedal Interactive Station -->
+                <div class="pedal-station">
+                    <div class="pedal-btn" id="dynoPedal">
+                        <span>PULL</span>
+                        <div style="font-size: 20px;">GAS</div>
+                        <span>PUSH</span>
+                    </div>
+                    <div style="margin-top: 18px; font-size: 13px; color: var(--text-muted); font-weight: 600;">
+                        💡 <strong>Sichqoncha bilan bosib turing</strong> yoki klaviaturada <strong>[SPACE]</strong>
+                        tugmasini ushlang!
+                    </div>
+                </div>
+
+                <!-- Live Gauges & Scoreboard -->
+                <div class="dyno-gauges-cluster">
+                    <div class="analog-dial-box">
+                        <div class="big-meter">
+                            <div class="big-meter-val" id="dynoSpeedVal">0</div>
+                            <div class="big-meter-lbl">TEZLIK (KM/H)</div>
+                        </div>
+
+                        <div style="width: 1px; height: 70px; background: var(--border-glass);"></div>
+
+                        <div class="big-meter">
+                            <div class="big-meter-val" id="dynoRpmVal">900</div>
+                            <div class="big-meter-lbl">AYLANISH (RPM)</div>
+                        </div>
+
+                        <div style="width: 1px; height: 70px; background: var(--border-glass);"></div>
+
+                        <div class="big-meter">
+                            <div class="big-meter-val" id="dynoGearVal">N</div>
+                            <div class="big-meter-lbl">UZATMA (GEAR)</div>
+                        </div>
+                    </div>
+
+                    <div class="drag-times-card">
+                        <div class="drag-time-row">
+                            <span style="color: var(--text-muted); font-weight: 600;">0 - 60 km/soat vaqti:</span>
+                            <span class="drag-val-record" id="drag0to60">--.-- s</span>
+                        </div>
+                        <div class="drag-time-row">
+                            <span style="color: #fff; font-weight: 700;">0 - 100 km/soat (Rasmiy Drag):</span>
+                            <span class="drag-val-record" id="drag0to100"
+                                style="color: var(--gold); font-size: 22px;">--.-- s</span>
+                        </div>
+                        <div class="drag-time-row">
+                            <span style="color: var(--text-muted); font-weight: 600;">Eng yuqori erishilgan
+                                tezlik:</span>
+                            <span class="drag-val-record" id="dragTopSpeed">0 km/h</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ARCADE MINI RACING GAME -->
+        <section class="game-section" id="game">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <h2><span>🎮</span> MINI POYGA: "MOSHINCHA TRASSADA"</h2>
+                    <p>Trafik orasidan o'ting, tangalarni to'plang va rekord natija o'rnating!</p>
+                </div>
+            </div>
+
+            <div class="game-wrapper">
+                <div class="game-canvas-box">
+                    <canvas id="raceCanvas" width="600" height="480"></canvas>
+
+                    <!-- Overlay Start / Game Over Screen -->
+                    <div class="game-overlay-screen" id="gameOverScreen">
+                        <h3 id="gameOverlayTitle">🏁 Moshincha Poygasiga Xush Kelibsiz!</h3>
+                        <p id="gameOverlayDesc">Mashinani o'ngga va chapga boshqarish uchun o'qlar (← / →) yoki A / D
+                            tugmalaridan foydalaning.</p>
+                        <button class="btn-play-game" id="btnStartGame">Boshlash (Start Race) 🏎️</button>
+                    </div>
+                </div>
+
+                <div class="game-stats-sidebar">
+                    <div class="game-stat-card">
+                        <div class="lbl">Hozirgi Ball</div>
+                        <div class="val" id="gameScoreVal">0</div>
+                    </div>
+
+                    <div class="game-stat-card">
+                        <div class="lbl">Eng Yaxshi Rekord</div>
+                        <div class="val" id="gameHighScoreVal" style="color: var(--gold);">0</div>
+                    </div>
+
+                    <div class="game-stat-card">
+                        <div class="lbl">Tezlik</div>
+                        <div class="val" id="gameSpeedVal" style="color: var(--red);">0 <small
+                                style="font-size: 14px;">km/h</small></div>
+                    </div>
+
+                    <div class="controls-cheat-sheet">
+                        <h4>Boshqaruv Tugmalari</h4>
+                        <div class="cheat-row">
+                            <span>Chapga burilish:</span>
+                            <span class="kbd-key">←</span> yoki <span class="kbd-key">A</span>
+                        </div>
+                        <div class="cheat-row">
+                            <span>O'ngga burilish:</span>
+                            <span class="kbd-key">→</span> yoki <span class="kbd-key">D</span>
+                        </div>
+                        <div class="cheat-row">
+                            <span>Signal chalish:</span>
+                            <span class="kbd-key">H</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOAN / LIZING CALCULATOR -->
+        <section class="loan-section" id="loan">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <h2><span>💳</span> AVTO KREDIT VA LIZING KALKULYATORI</h2>
+                    <p>Oylik to'lovni dollar ($) va o'zbek so'mida hisoblang</p>
+                </div>
+            </div>
+
+            <div class="loan-grid">
+                <div class="calc-inputs">
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <span>Avtomobil Narxi</span>
+                            <span id="loanPriceVal">$30,000</span>
+                        </div>
+                        <input type="range" id="loanPriceRange" min="5000" max="150000" step="1000" value="30000">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <span>Boshlang'ich To'lov (%)</span>
+                            <span id="loanDownPercentVal">30%</span>
+                        </div>
+                        <input type="range" id="loanDownRange" min="10" max="80" step="5" value="30">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <span>Kredit Muddati</span>
+                            <span id="loanTermVal">36 oy (3 yil)</span>
+                        </div>
+                        <input type="range" id="loanTermRange" min="12" max="60" step="12" value="36">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <span>Yillik Foiz Stavkasi</span>
+                            <span id="loanRateVal">22%</span>
+                        </div>
+                        <input type="range" id="loanRateRange" min="10" max="35" step="1" value="22">
+                    </div>
+                </div>
+
+                <div class="calc-result-card">
+                    <div class="calc-monthly-box">
+                        <div class="lbl">Taxminiy Oylik To'lov</div>
+                        <div class="val-usd" id="monthlyUsd">$802</div>
+                        <div class="val-uzs" id="monthlyUzs">≈ 10,265,000 UZS / oy</div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 12px; font-size: 13px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-dim);">Boshlang'ich to'lov summasi:</span>
+                            <strong id="downSumVal" style="font-family: var(--font-mono); color: #fff;">$9,000</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-dim);">Kredit summasi:</span>
+                            <strong id="creditSumVal"
+                                style="font-family: var(--font-mono); color: #fff;">$21,000</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-dim);">Jami to'lanadigan foiz:</span>
+                            <strong id="interestSumVal"
+                                style="font-family: var(--font-mono); color: var(--gold);">$7,872</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CAR DETAILS / ORDER MODAL -->
+    <div class="modal-backdrop" id="carModal">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="btnCloseModal">✕</button>
+            <div id="modalBody">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST POPUP -->
+    <div class="toast-bubble" id="toastBubble">
+        <span>⚡</span>
+        <span id="toastMsg">Xabar</span>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 AVTO SPEED PRO — O'zbekistonning eng zamonaviy desktop avtosalon platformasi.</p>
+        <p style="margin-top: 6px; font-size: 12px; color: var(--text-dim);">Tezlik, sifat va tyuning bir joyda!</p>
+    </footer>
+
+    <!-- AUDIO SYNTHESIS & SCRIPT LOGIC -->
+    <script>
+        /* ===================================================
+           1. WEB AUDIO API SYNTHESIZER (NO EXTERNAL MP3 NEEDED)
+           =================================================== */
+        class CarSoundEngine {
+            constructor() {
+                this.ctx = null;
+                this.isMuted = false;
+                this.revOsc = null;
+                this.revGain = null;
+                this.idleOsc = null;
+                this.idleGain = null;
+                this.isRevving = false;
+            }
+
+            init() {
+                if (!this.ctx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioContext();
+                }
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            }
+
+            toggleMute() {
+                this.isMuted = !this.isMuted;
+                return !this.isMuted;
+            }
+
+            // Horn sound (Dual-tone authentic car horn)
+            playHorn() {
+                if (this.isMuted) return;
+                this.init();
+                const now = this.ctx.currentTime;
+
+                const osc1 = this.ctx.createOscillator();
+                const osc2 = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+
+                osc1.type = 'sawtooth';
+                osc2.type = 'sawtooth';
+                osc1.frequency.setValueAtTime(420, now);
+                osc2.frequency.setValueAtTime(505, now);
+
+                gain.gain.setValueAtTime(0, now);
+                gain.gain.linearRampToValueAtTime(0.2, now + 0.05);
+                gain.gain.setValueAtTime(0.2, now + 0.35);
+                gain.gain.linearRampToValueAtTime(0, now + 0.45);
+
+                osc1.connect(gain);
+                osc2.connect(gain);
+                gain.connect(this.ctx.destination);
+
+                osc1.start(now);
+                osc2.start(now);
+                osc1.stop(now + 0.5);
+                osc2.stop(now + 0.5);
+            }
+
+            // Engine Revving Sound
+            startRev(rpmRatio = 0.8) {
+                if (this.isMuted) return;
+                this.init();
+                if (this.isRevving) return;
+                this.isRevving = true;
+
+                const now = this.ctx.currentTime;
+                this.revOsc = this.ctx.createOscillator();
+                this.revGain = this.ctx.createGain();
+                const filter = this.ctx.createBiquadFilter();
+
+                this.revOsc.type = 'sawtooth';
+                const baseFreq = 75;
+                const targetFreq = baseFreq + rpmRatio * 260;
+
+                this.revOsc.frequency.setValueAtTime(baseFreq, now);
+                this.revOsc.frequency.exponentialRampToValueAtTime(targetFreq, now + 0.6);
+
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(300, now);
+                filter.frequency.exponentialRampToValueAtTime(1400, now + 0.6);
+
+                this.revGain.gain.setValueAtTime(0, now);
+                this.revGain.gain.linearRampToValueAtTime(0.25, now + 0.08);
+
+                this.revOsc.connect(filter);
+                filter.connect(this.revGain);
+                this.revGain.connect(this.ctx.destination);
+
+                this.revOsc.start(now);
+            }
+
+            stopRev() {
+                if (!this.isRevving || !this.revGain || !this.revOsc) return;
+                this.isRevving = false;
+                const now = this.ctx.currentTime;
+                this.revGain.gain.linearRampToValueAtTime(0, now + 0.3);
+                this.revOsc.frequency.exponentialRampToValueAtTime(70, now + 0.3);
+                setTimeout(() => {
+                    try { this.revOsc.stop(); } catch (e) { }
+                }, 350);
+            }
+
+            // Quick click / coin chime
+            playBeep(freq = 600, dur = 0.1) {
+                if (this.isMuted) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(now);
+                osc.stop(now + dur);
+            }
+        }
+
+        const audio = new CarSoundEngine();
+
+        /* ===================================================
+           2. CAR DATABASE (UZBEKISTAN HEROES & SUPERKARS)
+           =================================================== */
+        const CAR_DATA = [
+            {
+                id: 'malibu2',
+                name: 'Chevrolet Malibu 2 Premier Turbo',
+                brand: 'Chevrolet',
+                cat: 'uzb',
+                badge: 'O\'ZBEKISTON HIT',
+                badgeClass: 'uzb',
+                priceUSD: 33500,
+                priceUZS: '428,000,000',
+                power: '253 ot kuchi',
+                zeroToHundred: '6.7 s',
+                topSpeed: '250 km/h',
+                engine: '2.0L Turbo',
+                image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80',
+                desc: 'O\'zbekiston yo\'llarining haqiqiy qiroli. 2.0 litrli turbo dvigatel, qulay charm salon, panaroma tom va zamonaviy xavfsizlik tizimi.'
+            },
+            {
+                id: 'gentra',
+                name: 'Chevrolet Gentra Elegance Plus (Black Edition)',
+                brand: 'Chevrolet',
+                cat: 'uzb',
+                badge: 'AFSONA',
+                badgeClass: 'uzb',
+                priceUSD: 14200,
+                priceUZS: '181,000,000',
+                power: '107 ot kuchi',
+                zeroToHundred: '11.8 s',
+                topSpeed: '180 km/h',
+                engine: '1.5L DOHC',
+                image: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80',
+                desc: 'O\'zbekiston xalqining sevimli mashinasi. Arzon ehtiyot qismlari, qulaylik va tyuning uchun cheksiz imkoniyatlar.'
+            },
+            {
+                id: 'tahoe',
+                name: 'Chevrolet Tahoe Premier V8 RST',
+                brand: 'Chevrolet',
+                cat: 'suv',
+                badge: 'PREMIUM SUV',
+                badgeClass: 'vip',
+                priceUSD: 105000,
+                priceUZS: '1,340,000,000',
+                power: '426 ot kuchi',
+                zeroToHundred: '5.9 s',
+                topSpeed: '210 km/h',
+                engine: '6.2L EcoTec3 V8',
+                image: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80',
+                desc: 'Vahshiy kuch va to\'liq hashamat. 7 o\'rindiqli keng salon, Magnetic Ride osma tizimi va daxshatli ovozga ega 6.2 litr V8.'
+            },
+            {
+                id: 'bmw_m5',
+                name: 'BMW M5 CS (Competition Sport)',
+                brand: 'BMW',
+                cat: 'supercar',
+                badge: 'SUPER SEDAN',
+                badgeClass: 'trend',
+                priceUSD: 165000,
+                priceUZS: '2,100,000,000',
+                power: '635 ot kuchi',
+                zeroToHundred: '3.0 s',
+                topSpeed: '305 km/h',
+                engine: '4.4L Twin-Turbo V8',
+                image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80',
+                desc: 'Dunyoning eng tezkor biznes sedani. Karbon tolali detallar, xDrive to\'liq uzatma va sport trassalari uchun maxsus sozlangan kuch.'
+            },
+            {
+                id: 'lambo_revuelto',
+                name: 'Lamborghini Revuelto V12 Hybrid',
+                brand: 'Lamborghini',
+                cat: 'supercar',
+                badge: 'GIPERKAR',
+                badgeClass: 'trend',
+                priceUSD: 608000,
+                priceUZS: '7,750,000,000',
+                power: '1015 ot kuchi',
+                zeroToHundred: '2.5 s',
+                topSpeed: '350 km/h',
+                engine: '6.5L V12 + 3 Elektromotor',
+                image: 'https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=800&q=80',
+                desc: 'Lamborghinining yangi flagmani. 1015 ot kuchi, gibrid texnologiya va kosmik dizayn uyg\'unligi.'
+            },
+            {
+                id: 'porsche_911',
+                name: 'Porsche 911 GT3 RS (992)',
+                brand: 'Porsche',
+                cat: 'supercar',
+                badge: 'TREK USTASI',
+                badgeClass: 'trend',
+                priceUSD: 245000,
+                priceUZS: '3,120,000,000',
+                power: '525 ot kuchi',
+                zeroToHundred: '3.2 s',
+                topSpeed: '296 km/h',
+                engine: '4.0L Atmosferali Boxer-6',
+                image: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=800&q=80',
+                desc: 'Poyga trassalari uchun yaratilgan durdona. DRS tizimi, aktiv aerodinamika va 9000 RPM gacha aylanuvchi dvigatel.'
+            },
+            {
+                id: 'byd_yangwang',
+                name: 'BYD Yangwang U9 Electric Hypercar',
+                brand: 'BYD',
+                cat: 'electric',
+                badge: 'ELEKTRO MAXLUQ',
+                badgeClass: 'trend',
+                priceUSD: 236000,
+                priceUZS: '3,010,000,000',
+                power: '1300 ot kuchi',
+                zeroToHundred: '2.36 s',
+                topSpeed: '309 km/h',
+                engine: '4x Mustaqil Elektromotor',
+                image: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80',
+                desc: 'DiSus-X intellektual podveskasi tufayli joyida sakray oladigan va 3 ta g\'ildirakda yura oladigan kelajak giperkari.'
+            },
+            {
+                id: 'tracker2',
+                name: 'Chevrolet Tracker 2 Premier Redline',
+                brand: 'Chevrolet',
+                cat: 'suv',
+                badge: 'ENG TALABGIR',
+                badgeClass: 'uzb',
+                priceUSD: 21500,
+                priceUZS: '275,000,000',
+                power: '132 ot kuchi',
+                zeroToHundred: '9.2 s',
+                topSpeed: '195 km/h',
+                engine: '1.2L Turbo',
+                image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80',
+                desc: 'Shahar va oilaviy sayohatlar uchun tejamkor, zamonaviy va chiroyli krossover. Avtomatik to\'xtash va qizil Redline uslub.'
+            }
+        ];
+
+        /* ===================================================
+           3. RENDER CATALOG CARDS
+           =================================================== */
+        function renderCars(filter = 'all', searchQuery = '') {
+            const container = document.getElementById('carsContainer');
+            container.innerHTML = '';
+
+            const filtered = CAR_DATA.filter(car => {
+                const matchCat = filter === 'all' || car.cat === filter;
+                const matchSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    car.brand.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchCat && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-dim);">Hech qanday mashina topilmadi 🏎️</div>`;
+                return;
+            }
+
+            filtered.forEach(car => {
+                const card = document.createElement('div');
+                card.className = 'car-card';
+                card.innerHTML = `
+                    <div class="card-img-wrap">
+                        <span class="card-badge ${car.badgeClass}">${car.badge}</span>
+                        <button class="card-sound-btn" data-id="${car.id}" title="Ovozini eshitish">🔊</button>
+                        <img src="${car.image}" alt="${car.name}" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-brand">${car.brand}</div>
+                        <h3 class="card-title">${car.name}</h3>
+                        <div class="card-specs-row">
+                            <div class="spec-item">
+                                <span>0-100 KM/H</span>
+                                <span>${car.zeroToHundred}</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>QUVVAT</span>
+                                <span>${car.power}</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>DVIGATEL</span>
+                                <span>${car.engine}</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="price-box">
+                                <span class="price-usd">$${car.priceUSD.toLocaleString()}</span>
+                                <span class="price-uzs">≈ ${car.priceUZS} UZS</span>
+                            </div>
+                            <button class="card-btn-inspect" data-id="${car.id}">Ko'rish</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            // Card sound button events
+            container.querySelectorAll('.card-sound-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    audio.startRev(0.8);
+                    showToast("🏎️ Dvigatel ovozi eshitilmoqda!");
+                    setTimeout(() => audio.stopRev(), 1200);
+                });
+            });
+
+            // Card inspect button events
+            container.querySelectorAll('.card-btn-inspect').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = btn.getAttribute('data-id');
+                    openCarModal(id);
+                });
+            });
+        }
+
+        /* ===================================================
+           4. MODAL & TOAST
+           =================================================== */
+        function openCarModal(carId) {
+            const car = CAR_DATA.find(c => c.id === carId);
+            if (!car) return;
+
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+                    <img src="${car.image}" style="width: 140px; height: 90px; object-fit: cover; border-radius: 12px; border: 1px solid var(--border-glass);" alt="${car.name}">
+                    <div>
+                        <span class="pill-badge ${car.badgeClass}">${car.badge}</span>
+                        <h2 style="font-family: var(--font-head); font-size: 24px; font-weight: 900; margin-top: 6px;">${car.name}</h2>
+                        <div style="font-size: 20px; font-family: var(--font-mono); color: var(--gold); font-weight: 800; margin-top: 4px;">
+                            $${car.priceUSD.toLocaleString()} <span style="font-size: 13px; color: var(--text-dim);">(≈ ${car.priceUZS} so'm)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 24px;">
+                    ${car.desc}
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 24px; background: rgba(255,255,255,0.02); padding: 16px; border-radius: 12px; border: 1px solid var(--border-glass);">
+                    <div><span style="color: var(--text-dim); font-size: 11px;">Maksimal Tezlik:</span> <br><strong>${car.topSpeed}</strong></div>
+                    <div><span style="color: var(--text-dim); font-size: 11px;">0 dan 100 gacha:</span> <br><strong>${car.zeroToHundred}</strong></div>
+                    <div><span style="color: var(--text-dim); font-size: 11px;">Ot Kuchi:</span> <br><strong>${car.power}</strong></div>
+                    <div><span style="color: var(--text-dim); font-size: 11px;">Dvigatel Turi:</span> <br><strong>${car.engine}</strong></div>
+                </div>
+
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn-action" id="btnTestDrive" style="flex: 1; justify-content: center; background: var(--cyan); color: #000; border: none; font-weight: 800;">
+                        🚘 Test-Drayvga Yozilish
+                    </button>
+                    <button class="btn-action" id="btnSoundModal" style="background: rgba(255,255,255,0.06);">
+                        📢 Signal Chalish
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('carModal').classList.add('active');
+
+            document.getElementById('btnTestDrive').onclick = () => {
+                showToast(`🎉 ${car.name} uchun test-drayv arizangiz qabul qilindi!`);
+                document.getElementById('carModal').classList.remove('active');
+            };
+
+            document.getElementById('btnSoundModal').onclick = () => {
+                audio.playHorn();
+            };
+        }
+
+        document.getElementById('btnCloseModal').addEventListener('click', () => {
+            document.getElementById('carModal').classList.remove('active');
+        });
+
+        document.getElementById('carModal').addEventListener('click', (e) => {
+            if (e.target.id === 'carModal') {
+                document.getElementById('carModal').classList.remove('active');
+            }
+        });
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastBubble');
+            document.getElementById('toastMsg').textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        /* ===================================================
+           5. HERO INTERACTIVITY & QUICK TUNER
+           =================================================== */
+        const heroRpmFill = document.getElementById('heroRpmFill');
+        const heroSpeedoVal = document.getElementById('heroSpeedoVal');
+        const heroBodyPath = document.getElementById('carBodyPath');
+        const heroNeon = document.getElementById('heroNeonUnderglow');
+        const btnHeroRev = document.getElementById('btnHeroRev');
+        const btnHeroHorn = document.getElementById('btnHeroHorn');
+
+        let isHeroRevving = false;
+        let heroRevInterval = null;
+        let currentRpm = 1000;
+        let currentSpeed = 0;
+
+        function startHeroRev() {
+            if (isHeroRevving) return;
+            isHeroRevving = true;
+            audio.startRev(0.9);
+
+            heroRevInterval = setInterval(() => {
+                if (currentRpm < 8500) currentRpm += 500;
+                if (currentSpeed < 280) currentSpeed += 15;
+                updateHeroHUD();
+            }, 50);
+        }
+
+        function stopHeroRev() {
+            if (!isHeroRevving) return;
+            isHeroRevving = false;
+            audio.stopRev();
+            clearInterval(heroRevInterval);
+
+            const decInterval = setInterval(() => {
+                if (currentRpm > 1000) currentRpm -= 400;
+                if (currentSpeed > 0) currentSpeed -= 12;
+
+                if (currentRpm <= 1000 && currentSpeed <= 0) {
+                    currentRpm = 1000;
+                    currentSpeed = 0;
+                    clearInterval(decInterval);
+                }
+                updateHeroHUD();
+            }, 40);
+        }
+
+        function updateHeroHUD() {
+            const pct = Math.min(100, Math.max(10, (currentRpm / 9000) * 100));
+            heroRpmFill.style.width = pct + '%';
+            heroSpeedoVal.innerHTML = Math.round(currentSpeed) + ' <small>KM/H</small>';
+        }
+
+        btnHeroRev.addEventListener('mousedown', startHeroRev);
+        btnHeroRev.addEventListener('mouseup', stopHeroRev);
+        btnHeroRev.addEventListener('mouseleave', stopHeroRev);
+        btnHeroRev.addEventListener('touchstart', (e) => { e.preventDefault(); startHeroRev(); });
+        btnHeroRev.addEventListener('touchend', stopHeroRev);
+
+        btnHeroHorn.addEventListener('click', () => {
+            audio.playHorn();
+            showToast("📢 BEEP BEEP!");
+        });
+
+        // Quick color dots
+        document.querySelectorAll('.color-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+                const col = dot.getAttribute('data-color');
+                heroBodyPath.setAttribute('fill', col);
+                audio.playBeep(400);
+            });
+        });
+
+        // Quick underglow buttons
+        document.querySelectorAll('.underglow-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.underglow-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const neonColor = btn.getAttribute('data-neon');
+                heroNeon.style.background = neonColor;
+                heroNeon.style.boxShadow = neonColor !== 'transparent' ? `0 0 35px ${neonColor}` : 'none';
+                audio.playBeep(520);
+            });
+        });
+
+        /* ===================================================
+           6. 3D TYUNING STUDIO LOGIC
+           =================================================== */
+        const studioBodyPath = document.getElementById('studioBodyPath');
+        const studioNeon = document.getElementById('studioNeonUnderglow');
+        const studioWindow1 = document.getElementById('studioWindowPath');
+        const studioWindow2 = document.getElementById('studioWindowPath2');
+        const studioModelLabel = document.getElementById('studioModelLabel');
+        const curModelTag = document.getElementById('curModelTag');
+        const curColorTag = document.getElementById('curColorTag');
+        const studioPriceVal = document.getElementById('studioPriceVal');
+
+        let basePrice = 32500;
+
+        document.querySelectorAll('.car-choice-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.car-choice-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const model = btn.textContent;
+                studioModelLabel.textContent = model;
+                curModelTag.textContent = model;
+
+                if (btn.dataset.model === 'lambo') basePrice = 608000;
+                else if (btn.dataset.model === 'porsche') basePrice = 245000;
+                else if (btn.dataset.model === 'bmw') basePrice = 165000;
+                else if (btn.dataset.model === 'tahoe') basePrice = 105000;
+                else if (btn.dataset.model === 'gentra') basePrice = 14500;
+                else basePrice = 32500;
+
+                studioPriceVal.textContent = '$' + basePrice.toLocaleString();
+                audio.playBeep(350);
+            });
+        });
+
+        document.querySelectorAll('.tyune-swatch').forEach(sw => {
+            sw.addEventListener('click', () => {
+                document.querySelectorAll('.tyune-swatch').forEach(s => s.classList.remove('active'));
+                sw.classList.add('active');
+                const c = sw.getAttribute('data-color');
+                const name = sw.getAttribute('data-name');
+                studioBodyPath.setAttribute('fill', c);
+                curColorTag.textContent = name;
+                audio.playBeep(440);
+            });
+        });
+
+        document.querySelectorAll('[data-tint]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('[data-tint]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const tint = parseFloat(btn.getAttribute('data-tint'));
+                studioWindow1.setAttribute('fill-opacity', tint);
+                studioWindow2.setAttribute('fill-opacity', tint);
+                audio.playBeep(480);
+            });
+        });
+
+        document.querySelectorAll('[data-glow]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('[data-glow]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const glow = btn.getAttribute('data-glow');
+                studioNeon.style.background = glow;
+                studioNeon.style.boxShadow = glow !== 'transparent' ? `0 0 35px ${glow}` : 'none';
+                audio.playBeep(520);
+            });
+        });
+
+        document.getElementById('btnOrderTuning').addEventListener('click', () => {
+            audio.playHorn();
+            showToast(`🔥 ${curModelTag.textContent} uchun kastom tyuning buyurtmangiz olindi!`);
+        });
+
+        /* ===================================================
+           7. 0-100 DRAG DYNO TEST
+           =================================================== */
+        const dynoPedal = document.getElementById('dynoPedal');
+        const dynoSpeedVal = document.getElementById('dynoSpeedVal');
+        const dynoRpmVal = document.getElementById('dynoRpmVal');
+        const dynoGearVal = document.getElementById('dynoGearVal');
+        const drag0to60 = document.getElementById('drag0to60');
+        const drag0to100 = document.getElementById('drag0to100');
+        const dragTopSpeed = document.getElementById('dragTopSpeed');
+
+        let dynoActive = false;
+        let dynoInterval = null;
+        let dynoSpeed = 0;
+        let dynoRpm = 900;
+        let dynoStartTime = 0;
+        let passed60 = false;
+        let passed100 = false;
+        let maxDynoSpeed = 0;
+
+        function startDynoGas() {
+            if (dynoActive) return;
+            dynoActive = true;
+            dynoPedal.classList.add('pressed');
+            audio.startRev(1.0);
+
+            if (dynoSpeed === 0) {
+                dynoStartTime = performance.now();
+                passed60 = false;
+                passed100 = false;
+            }
+
+            dynoInterval = setInterval(() => {
+                // acceleration logic
+                if (dynoSpeed < 320) {
+                    dynoSpeed += 2.2;
+                }
+                if (dynoRpm < 8800) {
+                    dynoRpm += 160;
+                } else {
+                    dynoRpm = 5500; // shift gear drop
+                    audio.playBeep(300, 0.05);
+                }
+
+                // Gear indicator
+                let gear = '1';
+                if (dynoSpeed > 220) gear = '6';
+                else if (dynoSpeed > 170) gear = '5';
+                else if (dynoSpeed > 120) gear = '4';
+                else if (dynoSpeed > 80) gear = '3';
+                else if (dynoSpeed > 45) gear = '2';
+                dynoGearVal.textContent = gear;
+
+                // Drag timer benchmarks
+                const elapsedSec = ((performance.now() - dynoStartTime) / 1000).toFixed(2);
+                if (dynoSpeed >= 60 && !passed60) {
+                    drag0to60.textContent = elapsedSec + ' s';
+                    passed60 = true;
+                }
+                if (dynoSpeed >= 100 && !passed100) {
+                    drag0to100.textContent = elapsedSec + ' s';
+                    passed100 = true;
+                    showToast(`⚡ 0-100 KM/H: ${elapsedSec} soniya!`);
+                }
+
+                if (dynoSpeed > maxDynoSpeed) {
+                    maxDynoSpeed = Math.round(dynoSpeed);
+                    dragTopSpeed.textContent = maxDynoSpeed + ' km/h';
+                }
+
+                dynoSpeedVal.textContent = Math.round(dynoSpeed);
+                dynoRpmVal.textContent = Math.round(dynoRpm);
+
+                if (dynoRpm > 8000) {
+                    dynoRpmVal.classList.add('redline');
+                } else {
+                    dynoRpmVal.classList.remove('redline');
+                }
+
+            }, 30);
+        }
+
+        function stopDynoGas() {
+            if (!dynoActive) return;
+            dynoActive = false;
+            dynoPedal.classList.remove('pressed');
+            audio.stopRev();
+            clearInterval(dynoInterval);
+
+            // Natural engine braking
+            const brakeInterval = setInterval(() => {
+                if (dynoSpeed > 0) dynoSpeed -= 3.5;
+                if (dynoRpm > 900) dynoRpm -= 250;
+
+                if (dynoSpeed <= 0) {
+                    dynoSpeed = 0;
+                    dynoRpm = 900;
+                    dynoGearVal.textContent = 'N';
+                    clearInterval(brakeInterval);
+                }
+
+                dynoSpeedVal.textContent = Math.round(dynoSpeed);
+                dynoRpmVal.textContent = Math.round(dynoRpm);
+                dynoRpmVal.classList.remove('redline');
+            }, 30);
+        }
+
+        dynoPedal.addEventListener('mousedown', startDynoGas);
+        dynoPedal.addEventListener('mouseup', stopDynoGas);
+        dynoPedal.addEventListener('mouseleave', stopDynoGas);
+        dynoPedal.addEventListener('touchstart', (e) => { e.preventDefault(); startDynoGas(); });
+        dynoPedal.addEventListener('touchend', stopDynoGas);
+
+        // Keyboard Spacebar for dyno gas
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && e.target.tagName !== 'INPUT') {
+                e.preventDefault();
+                startDynoGas();
+            }
+            if (e.key === 'h' || e.key === 'H') {
+                audio.playHorn();
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (e.code === 'Space') {
+                stopDynoGas();
+            }
+        });
+
+        /* ===================================================
+           8. ARCADE MINI RACING GAME (CANVAS 2D)
+           =================================================== */
+        const canvas = document.getElementById('raceCanvas');
+        const ctx = canvas.getContext('2d');
+        const gameOverlay = document.getElementById('gameOverScreen');
+        const gameOverlayTitle = document.getElementById('gameOverlayTitle');
+        const gameOverlayDesc = document.getElementById('gameOverlayDesc');
+        const btnStartGame = document.getElementById('btnStartGame');
+        const gameScoreVal = document.getElementById('gameScoreVal');
+        const gameHighScoreVal = document.getElementById('gameHighScoreVal');
+        const gameSpeedVal = document.getElementById('gameSpeedVal');
+
+        let gameRunning = false;
+        let gameScore = 0;
+        let gameHighScore = localStorage.getItem('avto_high_score') || 0;
+        gameHighScoreVal.textContent = gameHighScore;
+
+        let playerX = 270;
+        const playerY = 380;
+        const playerWidth = 50;
+        const playerHeight = 80;
+
+        let roadOffset = 0;
+        let obstacles = [];
+        let coins = [];
+        let gameSpeed = 6;
+        let animFrameId = null;
+
+        const keys = { left: false, right: false };
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keys.left = true;
+            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keys.right = true;
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keys.left = false;
+            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keys.right = false;
+        });
+
+        function spawnObstacle() {
+            const lanes = [130, 250, 370];
+            const lane = lanes[Math.floor(Math.random() * lanes.length)];
+            const colors = ['#ff2a5f', '#ffb703', '#10b981', '#ffffff'];
+            obstacles.push({
+                x: lane + 25,
+                y: -90,
+                width: 48,
+                height: 75,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                speed: 3 + Math.random() * 2
+            });
+        }
+
+        function spawnCoin() {
+            const lanes = [140, 260, 380];
+            const lane = lanes[Math.floor(Math.random() * lanes.length)];
+            coins.push({
+                x: lane + 25,
+                y: -50,
+                radius: 12
+            });
+        }
+
+        function gameLoop() {
+            if (!gameRunning) return;
+
+            // Update Road
+            roadOffset = (roadOffset + gameSpeed) % 40;
+
+            // Update Player
+            if (keys.left && playerX > 110) playerX -= 6;
+            if (keys.right && playerX < 440) playerX += 6;
+
+            // Spawn entities
+            if (Math.random() < 0.025) spawnObstacle();
+            if (Math.random() < 0.02) spawnCoin();
+
+            // Clear Canvas
+            ctx.fillStyle = '#0a0d14';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Road
+            ctx.fillStyle = '#1e2433';
+            ctx.fillRect(100, 0, 400, canvas.height);
+
+            // Road borders (Curbs)
+            ctx.fillStyle = '#ff2a5f';
+            ctx.fillRect(95, 0, 5, canvas.height);
+            ctx.fillRect(500, 0, 5, canvas.height);
+
+            // Road Dash Lines
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.lineWidth = 4;
+            ctx.setLineDash([20, 20]);
+            ctx.lineDashOffset = -roadOffset;
+
+            ctx.beginPath();
+            ctx.moveTo(233, 0); ctx.lineTo(233, canvas.height);
+            ctx.moveTo(366, 0); ctx.lineTo(366, canvas.height);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Draw Coins
+            for (let i = coins.length - 1; i >= 0; i--) {
+                const c = coins[i];
+                c.y += gameSpeed;
+
+                ctx.beginPath();
+                ctx.arc(c.x, c.y, c.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#ffb703';
+                ctx.fill();
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Collision with player
+                if (Math.hypot(playerX + playerWidth / 2 - c.x, playerY + playerHeight / 2 - c.y) < 35) {
+                    gameScore += 50;
+                    audio.playBeep(880, 0.08);
+                    coins.splice(i, 1);
+                    continue;
+                }
+
+                if (c.y > canvas.height + 50) coins.splice(i, 1);
+            }
+
+            // Draw Obstacles (Traffic cars)
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                const obs = obstacles[i];
+                obs.y += gameSpeed - obs.speed;
+
+                // Draw Car Body
+                ctx.fillStyle = obs.color;
+                ctx.beginPath();
+                ctx.roundRect(obs.x, obs.y, obs.width, obs.height, 8);
+                ctx.fill();
+
+                // Windshield
+                ctx.fillStyle = '#0f172a';
+                ctx.fillRect(obs.x + 6, obs.y + 14, obs.width - 12, 14);
+
+                // Headlights
+                ctx.fillStyle = '#ff2a5f';
+                ctx.fillRect(obs.x + 4, obs.y + obs.height - 6, 8, 4);
+                ctx.fillRect(obs.x + obs.width - 12, obs.y + obs.height - 6, 8, 4);
+
+                // Collision Detection
+                if (
+                    playerX < obs.x + obs.width &&
+                    playerX + playerWidth > obs.x &&
+                    playerY < obs.y + obs.height &&
+                    playerY + playerHeight > obs.y
+                ) {
+                    endGame();
+                    return;
+                }
+
+                if (obs.y > canvas.height + 100) {
+                    obstacles.splice(i, 1);
+                    gameScore += 10;
+                }
+            }
+
+            // Draw Player Car (Cyber Cyan Sport)
+            ctx.shadowColor = '#00f0ff';
+            ctx.shadowBlur = 15;
+            ctx.fillStyle = '#00f0ff';
+            ctx.beginPath();
+            ctx.roundRect(playerX, playerY, playerWidth, playerHeight, 10);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // Roof / Glass
+            ctx.fillStyle = '#090d16';
+            ctx.fillRect(playerX + 8, playerY + 22, playerWidth - 16, 28);
+
+            // Front Headlights
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(playerX + 5, playerY + 4, 10, 5);
+            ctx.fillRect(playerX + playerWidth - 15, playerY + 4, 10, 5);
+
+            // Tail lights
+            ctx.fillStyle = '#ff2a5f';
+            ctx.fillRect(playerX + 5, playerY + playerHeight - 6, 10, 4);
+            ctx.fillRect(playerX + playerWidth - 15, playerY + playerHeight - 6, 10, 4);
+
+            // Score & HUD update
+            gameScoreVal.textContent = gameScore;
+            gameSpeedVal.innerHTML = Math.round(gameSpeed * 18) + ' <small style="font-size: 14px;">km/h</small>';
+
+            // Gradual speedup
+            gameSpeed += 0.0015;
+
+            animFrameId = requestAnimationFrame(gameLoop);
+        }
+
+        function startGame() {
+            gameRunning = true;
+            gameScore = 0;
+            gameSpeed = 6;
+            obstacles = [];
+            coins = [];
+            playerX = 270;
+            gameOverlay.classList.add('hidden');
+            audio.playBeep(600, 0.15);
+            gameLoop();
+        }
+
+        function endGame() {
+            gameRunning = false;
+            cancelAnimationFrame(animFrameId);
+            audio.playHorn();
+
+            if (gameScore > gameHighScore) {
+                gameHighScore = gameScore;
+                localStorage.setItem('avto_high_score', gameHighScore);
+                gameHighScoreVal.textContent = gameHighScore;
+                gameOverlayTitle.textContent = '🏆 YANGI REKORD!';
+            } else {
+                gameOverlayTitle.textContent = '💥 TO\'QNASHUV!';
+            }
+
+            gameOverlayDesc.textContent = `Siz to'plagan yakuniy ball: ${gameScore}. Qayta o'ynash uchun tugmani bosing!`;
+            btnStartGame.textContent = 'Qayta Boshlash 🔄';
+            gameOverlay.classList.remove('hidden');
+        }
+
+        btnStartGame.addEventListener('click', startGame);
+
+        /* ===================================================
+           9. LOAN / LIZING CALCULATOR LOGIC
+           =================================================== */
+        const loanPriceRange = document.getElementById('loanPriceRange');
+        const loanDownRange = document.getElementById('loanDownRange');
+        const loanTermRange = document.getElementById('loanTermRange');
+        const loanRateRange = document.getElementById('loanRateRange');
+
+        const loanPriceVal = document.getElementById('loanPriceVal');
+        const loanDownPercentVal = document.getElementById('loanDownPercentVal');
+        const loanTermVal = document.getElementById('loanTermVal');
+        const loanRateVal = document.getElementById('loanRateVal');
+
+        const monthlyUsd = document.getElementById('monthlyUsd');
+        const monthlyUzs = document.getElementById('monthlyUzs');
+        const downSumVal = document.getElementById('downSumVal');
+        const creditSumVal = document.getElementById('creditSumVal');
+        const interestSumVal = document.getElementById('interestSumVal');
+
+        const USD_TO_UZS = 12800;
+
+        function updateLoanCalc() {
+            const price = parseFloat(loanPriceRange.value);
+            const downPct = parseFloat(loanDownRange.value);
+            const termMonths = parseInt(loanTermRange.value);
+            const annualRate = parseFloat(loanRateRange.value);
+
+            loanPriceVal.textContent = '$' + price.toLocaleString();
+            loanDownPercentVal.textContent = downPct + '%';
+            loanTermVal.textContent = `${termMonths} oy (${termMonths / 12} yil)`;
+            loanRateVal.textContent = annualRate + '%';
+
+            const downAmt = Math.round((price * downPct) / 100);
+            const loanAmt = price - downAmt;
+
+            const monthlyRate = (annualRate / 100) / 12;
+            const monthlyPayment = (loanAmt * monthlyRate * Math.pow(1 + monthlyRate, termMonths)) / (Math.pow(1 + monthlyRate, termMonths) - 1);
+            const totalPayment = monthlyPayment * termMonths;
+            const totalInterest = totalPayment - loanAmt;
+
+            monthlyUsd.textContent = '$' + Math.round(monthlyPayment).toLocaleString();
+            monthlyUzs.textContent = `≈ ${Math.round(monthlyPayment * USD_TO_UZS).toLocaleString('uz-UZ')} UZS / oy`;
+            downSumVal.textContent = '$' + downAmt.toLocaleString();
+            creditSumVal.textContent = '$' + loanAmt.toLocaleString();
+            interestSumVal.textContent = '$' + Math.round(totalInterest).toLocaleString();
+        }
+
+        [loanPriceRange, loanDownRange, loanTermRange, loanRateRange].forEach(input => {
+            input.addEventListener('input', updateLoanCalc);
+        });
+
+        /* ===================================================
+           10. FILTER & SEARCH EVENTS
+           =================================================== */
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const cat = btn.getAttribute('data-cat');
+                const query = document.getElementById('carSearchInput').value;
+                renderCars(cat, query);
+            });
+        });
+
+        document.getElementById('carSearchInput').addEventListener('input', (e) => {
+            const activeCat = document.querySelector('.filter-btn.active').getAttribute('data-cat');
+            renderCars(activeCat, e.target.value);
+        });
+
+        /* ===================================================
+           11. HEADER ACTION BUTTONS (SOUND & FULLSCREEN)
+           =================================================== */
+        const btnToggleSound = document.getElementById('btnToggleSound');
+        btnToggleSound.addEventListener('click', () => {
+            const isUnmuted = audio.toggleMute();
+            if (isUnmuted) {
+                btnToggleSound.textContent = '🔊';
+                btnToggleSound.classList.remove('muted');
+                btnToggleSound.classList.add('active');
+                showToast("🔊 Ovozlar yoqildi!");
+            } else {
+                btnToggleSound.textContent = '🔇';
+                btnToggleSound.classList.remove('active');
+                btnToggleSound.classList.add('muted');
+                showToast("🔇 Ovozlar o'chirildi!");
+            }
+        });
+
+        document.getElementById('btnFullscreen').addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => { });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        });
+
+        // Initialize App
+        renderCars();
+        updateLoanCalc();
+    </script>
+</body>
+
+</html>
